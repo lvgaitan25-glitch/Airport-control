@@ -2,8 +2,12 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import estructuras.ArbolPasajeros;
+import modelos.Pasajeros;
 
 public class VentanaPrincipal extends JFrame {
+    ArbolPasajeros arbol =
+        new ArbolPasajeros();
 
     public VentanaPrincipal() {
 
@@ -13,6 +17,26 @@ public class VentanaPrincipal extends JFrame {
         setLocationRelativeTo(null);
 
         iniciarComponentes();
+        arbol.insertar(
+        new Pasajeros(
+                100,
+                "Sebastian",
+                "Medellin",
+                "A12"));
+
+arbol.insertar(
+        new Pasajeros(
+                50,
+                "Valentina",
+                "Bogota",
+                "B05"));
+
+arbol.insertar(
+        new Pasajeros(
+                150,
+                "Carlos",
+                "Miami",
+                "C18"));
     }
 
     public void iniciarComponentes() {
@@ -73,10 +97,29 @@ public class VentanaPrincipal extends JFrame {
         });
 
         btnPasajeros.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null,
-                    "Módulo Árbol: Pasajeros por ticket");
-        });
 
+    String entrada =
+            JOptionPane.showInputDialog(
+                    "Ingrese ticket:");
+
+    int ticket = Integer.parseInt(entrada);
+
+    boolean encontrado =
+            arbol.buscar(ticket);
+
+    if (encontrado) {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Pasajero encontrado");
+
+    } else {
+
+        JOptionPane.showMessageDialog(
+                null,
+                "Pasajero NO encontrado");
+    }
+});
         add(panelPrincipal);
     }
 }
