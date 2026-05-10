@@ -1,5 +1,10 @@
 public class ControlCentral {
 
+    package sistema;
+
+import estructuras.*;
+import modelos.*;
+
     ArregloAviones arreglo = new ArregloAviones();
     ColaDespegue cola = new ColaDespegue();
     PilaHistorial historial = new PilaHistorial();
@@ -42,11 +47,34 @@ public class ControlCentral {
         radar.mostrarRadar();
 
         // Árbol pasajeros
-        pasajeros.insertar(100);
-        pasajeros.insertar(50);
-        pasajeros.insertar(150);
+        Pasajeros p1 =
+        new Pasajeros(
+                100,
+                "Sebastian",
+                "Medellin",
+                "A12");
 
-        pasajeros.buscar(150);
+Pasajeros p2 =
+        new Pasajeros(
+                50,
+                "Valentina",
+                "Bogota",
+                "B05");
+
+Pasajeros p3 =
+        new Pasajeros(
+                150,
+                "Carlos",
+                "Miami",
+                "C18");
+
+pasajeros.insertar(p1);
+pasajeros.insertar(p2);
+pasajeros.insertar(p3);
+
+pasajeros.buscar(150);
+
+pasajeros.mostrarInOrden();
 
         // Historial
         historial.mostrarHistorial();
