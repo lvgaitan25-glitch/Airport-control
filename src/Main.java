@@ -1,11 +1,15 @@
 import interfaz.VentanaPrincipal;
+import javax.swing.SwingUtilities;
 
 public class Main {
-
     public static void main(String[] args) {
-
-        VentanaPrincipal ventana = new VentanaPrincipal();
-
-        ventana.setVisible(true);
+        SwingUtilities.invokeLater(() -> {
+            try {
+                VentanaPrincipal ventana = new VentanaPrincipal();
+                ventana.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

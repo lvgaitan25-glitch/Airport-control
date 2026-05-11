@@ -1,50 +1,28 @@
 package interfaz;
 
+import Control.ControlCentral;
 import java.awt.*;
-import javax.swing.*;
+import javax.swing.*; // <--- Ahora esta importación sí funcionará
 
 public class VentanaPrincipal extends JFrame {
-
-    JPanel panelMenu;
-    JPanel panelContenido;
+    private JPanel panelContenido = new JPanel();
+    private ControlCentral control = new ControlCentral();
 
     public VentanaPrincipal() {
-
-        setTitle("Cyber-Airport Control");
+        setTitle("Cyber Airport Control");
         setSize(1200, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
-        iniciarComponentes();
+        setLayout(new BorderLayout());
+        
+        crearMenu();
+        
+        panelContenido.setLayout(new BorderLayout());
+        add(panelContenido, BorderLayout.CENTER);
     }
 
-    public void iniciarComponentes() {
-
-        // PANEL PRINCIPAL
-        setLayout(new BorderLayout());
-
-        // =========================
-        // PANEL SUPERIOR
-        // =========================
-
-        JPanel panelSuperior = new JPanel();
-
-        JLabel titulo = new JLabel("CYBER AIRPORT CONTROL");
-
-        titulo.setFont(new Font("Arial", Font.BOLD, 28));
-
-        panelSuperior.add(titulo);
-
-        add(panelSuperior, BorderLayout.NORTH);
-
-        // =========================
-        // PANEL MENU
-        // =========================
-
-        panelMenu = new JPanel();
-
-        panelMenu.setLayout(new GridLayout(6,1));
-
+    private void crearMenu() {
+        JPanel menu = new JPanel(new GridLayout(6, 1, 5, 5));
         JButton btnAviones = new JButton("Aviones");
         JButton btnPasajeros = new JButton("Pasajeros");
         JButton btnRutas = new JButton("Rutas");
@@ -52,65 +30,21 @@ public class VentanaPrincipal extends JFrame {
         JButton btnDespegues = new JButton("Despegues");
         JButton btnHistorial = new JButton("Historial");
 
-        panelMenu.add(btnAviones);
-        panelMenu.add(btnPasajeros);
-        panelMenu.add(btnRutas);
-        panelMenu.add(btnRadar);
-        panelMenu.add(btnDespegues);
-        panelMenu.add(btnHistorial);
+        btnAviones.addActionListener(e -> mostrar(new AvionesPanel(control)));
+        btnPasajeros.addActionListener(e -> mostrar(new PasajerosPanel(control)));
+        btnRutas.addActionListener(e -> mostrar(new RutasPanel(control)));
+        btnRadar.addActionListener(e -> mostrar(new RadarPanel(control)));
+        btnDespegues.addActionListener(e -> mostrar(new DespeguesPanel(control)));
+        btnHistorial.addActionListener(e -> mostrar(new HistorialPanel(control)));
 
-        add(panelMenu, BorderLayout.WEST);
-
-        // =========================
-        // PANEL CONTENIDO
-        // =========================
-
-        panelContenido = new JPanel();
-
-        panelContenido.setLayout(new BorderLayout());
-
-        JLabel bienvenida = new JLabel(
-                "Bienvenido al sistema aeroportuario",
-                SwingConstants.CENTER
-        );
-
-        bienvenida.setFont(new Font("Arial", Font.PLAIN, 24));
-
-        panelContenido.add(bienvenida, BorderLayout.CENTER);
-
-        add(panelContenido, BorderLayout.CENTER);
-
-        // =========================
-        // EVENTOS BOTONES
-        // =========================
-
-        btnAviones.addActionListener(e -> mostrarModulo("MÓDULO AVIONES"));
-
-        btnPasajeros.addActionListener(e -> mostrarModulo("MÓDULO PASAJEROS"));
-
-        btnRutas.addActionListener(e -> mostrarModulo("MÓDULO RUTAS"));
-
-        btnRadar.addActionListener(e -> mostrarModulo("MÓDULO RADAR"));
-
-        btnDespegues.addActionListener(e -> mostrarModulo("MÓDULO DESPEGUES"));
-
-        btnHistorial.addActionListener(e -> mostrarModulo("MÓDULO HISTORIAL"));
+        menu.add(btnAviones); menu.add(btnPasajeros); menu.add(btnRutas);
+        menu.add(btnRadar); menu.add(btnDespegues); menu.add(btnHistorial);
+        add(menu, BorderLayout.WEST);
     }
 
-    // =========================
-    // CAMBIAR CONTENIDO
-    // =========================
-
-    public void mostrarModulo(String texto) {
-
+    private void mostrar(JPanel panel) {
         panelContenido.removeAll();
-
-        JLabel label = new JLabel(texto, SwingConstants.CENTER);
-
-        label.setFont(new Font("Arial", Font.BOLD, 30));
-
-        panelContenido.add(label, BorderLayout.CENTER);
-
+        panelContenido.add(panel, BorderLayout.CENTER);
         panelContenido.revalidate();
         panelContenido.repaint();
     }

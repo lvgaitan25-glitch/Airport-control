@@ -1,27 +1,17 @@
 package estructuras;
+
 import java.util.Stack;
 
 public class PilaHistorial {
+    private Stack<String> historial = new Stack<>();
 
-    Stack<String> historial = new Stack<>();
+    public void guardarAccion(String accion) { historial.push(accion); }
 
-    public void guardarAccion(String accion) {
-
-        historial.push(accion);
+    public String deshacerAccion() {
+        return historial.isEmpty() ? "No hay acciones" : historial.pop();
     }
 
-    public void deshacerAccion() {
-
-        if (!historial.isEmpty()) {
-
-            System.out.println("Deshaciendo: " + historial.pop());
-        }
-    }
-
-    public void mostrarHistorial() {
-
-        System.out.println("\n=== HISTORIAL ===");
-
-        System.out.println(historial);
+    public String verTop() {
+        return historial.isEmpty() ? "Vacío" : historial.peek();
     }
 }

@@ -1,81 +1,31 @@
 package estructuras;
+import modelos.Pasajero;
 
 class Nodo {
+    Pasajero dato; // Antes tenías 'int ticket', cámbialo por el objeto
+    Nodo izquierdo, derecho;
 
-    int ticket;
-
-    Nodo izquierdo;
-    Nodo derecho;
-
-    public Nodo(int ticket) {
-
-        this.ticket = ticket;
+    public Nodo(Pasajero p) {
+        this.dato = p;
     }
 }
 
 public class ArbolPasajeros {
+    private Nodo raiz;
 
-    Nodo raiz;
-
-    public void insertar(int ticket) {
-
-        raiz = insertarRecursivo(raiz, ticket);
+    public void insertar(Pasajero p) {
+        raiz = insertarRecursivo(raiz, p);
     }
 
-    private Nodo insertarRecursivo(Nodo actual, int ticket) {
-
-        if (actual == null) {
-
-            return new Nodo(ticket);
+    private Nodo insertarRecursivo(Nodo actual, Pasajero p) {
+        if (actual == null) return new Nodo(p);
+        
+        // Comparamos los tickets para ordenar el árbol
+        if (p.getTicket() < actual.dato.getTicket()) {
+            actual.izquierdo = insertarRecursivo(actual.izquierdo, p);
+        } else if (p.getTicket() > actual.dato.getTicket()) {
+            actual.derecho = insertarRecursivo(actual.derecho, p);
         }
-
-        if (ticket < actual.ticket) {
-
-            actual.izquierdo = insertarRecursivo(actual.izquierdo, ticket);
-
-        } else if (ticket > actual.ticket) {
-
-            actual.derecho = insertarRecursivo(actual.derecho, ticket);
-        }
-
         return actual;
-    }
-
-    public boolean buscar(int ticket) {
-
-        boolean encontrado = buscarRecursivo(raiz, ticket);
-
-        if (encontrado) {
-
-            System.out.println("Pasajero encontrado con ticket: " + ticket);
-
-        } else {
-
-            System.out.println("Pasajero NO encontrado");
-        }
-
-        return encontrado;
-    }
-
-    private boolean buscarRecursivo(Nodo actual, int ticket) {
-
-        if (actual == null) {
-
-            return false;
-        }
-
-        if (ticket == actual.ticket) {
-
-            return true;
-        }
-
-        if (ticket < actual.ticket) {
-
-            return buscarRecursivo(actual.izquierdo, ticket);
-
-        } else {
-
-            return buscarRecursivo(actual.derecho, ticket);
-        }
     }
 }
