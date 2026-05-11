@@ -1,3 +1,4 @@
+package estructuras;
 import java.util.*;
 
 public class GrafoRutas {

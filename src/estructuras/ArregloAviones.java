@@ -1,3 +1,6 @@
+package estructuras;
+import modelos.Avion;
+
 public class ArregloAviones {
 
     Avion[] aviones = new Avion[10];

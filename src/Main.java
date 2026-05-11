@@ -1,10 +1,11 @@
+import interfaz.VentanaPrincipal;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        ControlCentral sistema = new ControlCentral();
+        VentanaPrincipal ventana = new VentanaPrincipal();
 
-        sistema.iniciarSistema();
-
+        ventana.setVisible(true);
     }
 }

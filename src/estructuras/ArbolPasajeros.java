@@ -1,3 +1,5 @@
+package estructuras;
+
 class Nodo {
 
     int ticket;

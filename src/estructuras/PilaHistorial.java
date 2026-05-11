@@ -1,3 +1,4 @@
+package estructuras;
 import java.util.Stack;
 
 public class PilaHistorial {

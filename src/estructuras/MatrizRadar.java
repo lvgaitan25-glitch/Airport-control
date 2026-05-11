@@ -1,3 +1,5 @@
+package estructuras;
+
 public class MatrizRadar {
 
     int[][] radar = new int[5][5];

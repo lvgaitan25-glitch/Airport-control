@@ -1,3 +1,4 @@
+
 public class ControlCentral {
 
     ArregloAviones arreglo = new ArregloAviones();
