@@ -1,22 +1,18 @@
 package modelos;
 
 public class Avion {
-
-    private String id;
+    private String matricula;
     private String modelo;
-    private String estado;
+    private String hangar;
 
-    public Avion(String id, String modelo, String estado) {
-        this.id = id;
+    public Avion(String matricula, String modelo, String hangar) {
+        this.matricula = matricula;
         this.modelo = modelo;
-        this.estado = estado;
+        this.hangar = hangar;
     }
 
-    public String getId() { return id; }
+    // Getters para la tabla
+    public String getMatricula() { return matricula; }
     public String getModelo() { return modelo; }
-    public String getEstado() { return estado; }
-
-    public String info() {
-        return id + " | " + modelo + " | " + estado;
-    }
+    public String getHangar() { return hangar; }
 }

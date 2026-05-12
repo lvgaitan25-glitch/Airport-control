@@ -1,24 +1,31 @@
 package modelos;
 
 public class Pasajero {
-    private int ticket;
+    private int id; // Atributo para el ID del ticket
     private String nombre;
     private String destino;
 
-    // Constructor completo
-    public Pasajero(int ticket, String nombre, String destino) {
-        this.ticket = ticket;
+    public Pasajero(int id, String nombre, String destino) {
+        this.id = id;
         this.nombre = nombre;
         this.destino = destino;
     }
 
-    // Getters (necesarios para mostrar los datos en las tablas)
-    public int getTicket() { return ticket; }
-    public String getNombre() { return nombre; }
-    public String getDestino() { return destino; }
-
-    @Override
-    public String toString() {
-        return "Ticket: " + ticket + " | Pasajero: " + nombre;
+    // EL MÉTODO QUE FALTA: Este es el que resuelve el error
+    public int getId() {
+        return id;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    // Setters por si necesitas modificar datos luego
+    public void setId(int id) { this.id = id; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setDestino(String destino) { this.destino = destino; }
 }

@@ -1,23 +1,37 @@
 package interfaz;
 
-import Control.ControlCentral;
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
+import Control.ControlCentral;
 
 public class HistorialPanel extends JPanel {
-    public HistorialPanel(ControlCentral control) {
-        setLayout(new BorderLayout());
-        DefaultListModel<String> modeloLista = new DefaultListModel<>();
-        JList<String> lista = new JList<>(modeloLista);
-        JButton btnUndo = new JButton("Deshacer Última Acción (UNDO)");
+    private ControlCentral Control;
+    private JTextArea areaTexto;
 
-        btnUndo.addActionListener(e -> {
-            String accion = control.getHistorial().deshacerAccion();
-            JOptionPane.showMessageDialog(this, "Deshaciendo: " + accion);
-        });
+    public HistorialPanel(ControlCentral Control) {
+        this.Control = Control;
+        setBackground(new Color(21, 32, 43));
+        setLayout(new BorderLayout(15, 15));
+        
+        JLabel titulo = new JLabel("HISTORIAL DE OPERACIONES");
+        titulo.setForeground(Color.WHITE);
+        add(titulo, BorderLayout.NORTH);
 
-        add(new JLabel("HISTORIAL DE ACCIONES (PILA)", JLabel.CENTER), BorderLayout.NORTH);
-        add(new JScrollPane(lista), BorderLayout.CENTER);
-        add(btnUndo, BorderLayout.SOUTH);
+        areaTexto = new JTextArea();
+        areaTexto.setEditable(false);
+        areaTexto.setBackground(new Color(13, 23, 33));
+        areaTexto.setForeground(Color.GREEN);
+        
+        add(new JScrollPane(areaTexto), BorderLayout.CENTER);
+    }
+
+    // ESTE ES EL MÉTODO QUE TE DABA ERROR:
+    public void cargarHistorial() {
+        if (areaTexto != null && Control.getHistorial() != null) {
+            areaTexto.setText("");
+            for (String log : Control.getHistorial().getListaLogs()) {
+                areaTexto.append("> " + log + "\n");
+            }
+        }
     }
 }

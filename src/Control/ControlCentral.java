@@ -1,43 +1,136 @@
 package Control;
 
 import estructuras.*;
-import modelos.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ControlCentral {
-    private ArregloAviones aviones = new ArregloAviones();
-    private ArbolPasajeros pasajeros = new ArbolPasajeros();
-    private ColaDespegue cola = new ColaDespegue();
-    private GrafoRutas rutas = new GrafoRutas();
-    private MatrizRadar radar = new MatrizRadar();
-    private PilaHistorial historial = new PilaHistorial();
+
+    private ArbolPasajeros pasajeros;
+
+    private MatrizRadar radar;
+
+    private GrafoRutas rutas;
+
+    private Queue<String> colaDespegue;
+
+    private Historial historial;
+
+    // =====================================================
+    // LISTA DE AVIONES EN HANGAR
+    // =====================================================
+
+    private ArrayList<String> hangares;
+
+    // =====================================================
+    // CONSTRUCTOR
+    // =====================================================
 
     public ControlCentral() {
-        inicializar();
+
+        this.pasajeros = new ArbolPasajeros();
+
+        this.radar = new MatrizRadar(5, 5);
+
+        this.rutas = new GrafoRutas();
+
+        this.colaDespegue = new LinkedList<>();
+
+        this.historial = new Historial();
+
+        this.hangares = new ArrayList<>();
     }
 
-    private void inicializar() {
-        // CORRECCIÓN: Usa paréntesis (), NO corchetes [] para los parámetros
-        aviones.agregar(new Avion("AV001", "Boeing 737", "Hangar"));
-        aviones.agregar(new Avion("AV002", "A320", "Pista"));
-        
-        cola.encolar("AV001");
-        
-        rutas.conectar("Bogotá", "Miami");
-        
-        // El error probablemente estaba aquí:
-        radar.ocupar(1, 2); 
-        radar.ocupar(3, 4);
-        
-        pasajeros.insertar(new Pasajero(100, "Juan Carlos", "Madrid"));
-        
-        historial.guardarAccion("Sistema Inicializado");
+    // =====================================================
+    // INICIAR SISTEMA
+    // =====================================================
+
+    public void iniciarSistema() {
+
+        System.out.println(
+                "Sistema aeroportuario iniciado");
     }
 
-    // Getters... (asegúrate de tenerlos)
-    public ArregloAviones getAviones() { return aviones; }
-    public ArbolPasajeros getPasajeros() { return pasajeros; }
-    public ColaDespegue getCola() { return cola; }
-    public GrafoRutas getRutas() { return rutas; }
-    public MatrizRadar getRadar() { return radar; }
-    public PilaHistorial getHistorial() { return historial; }
+    // =====================================================
+    // COLA FIFO
+    // =====================================================
+
+    public void encolarAvion(String avion) {
+
+        colaDespegue.add(avion);
+    }
+
+    public String despacharAvion() {
+
+        return colaDespegue.poll();
+    }
+
+    public Queue<String> getColaDespegue() {
+
+        return colaDespegue;
+    }
+
+    // =====================================================
+    // HANGARES
+    // =====================================================
+
+    public void registrarAvionHangar(String avion) {
+
+        hangares.add(avion);
+    }
+
+    public ArrayList<String> getHangares() {
+
+        return hangares;
+    }
+
+    public boolean avionExiste(String avion) {
+
+        return hangares.contains(avion);
+    }
+
+    // =====================================================
+    // GETTERS
+    // =====================================================
+
+    public ArbolPasajeros getPasajeros() {
+
+        return pasajeros;
+    }
+
+    public MatrizRadar getRadar() {
+
+        return radar;
+    }
+
+    public GrafoRutas getRutas() {
+
+        return rutas;
+    }
+
+    public Historial getHistorial() {
+
+        return historial;
+    }
+
+    // =====================================================
+    // HISTORIAL
+    // =====================================================
+
+    public class Historial {
+
+        private ArrayList<String> logs =
+                new ArrayList<>();
+
+        public void guardarAccion(String accion) {
+
+            logs.add(accion);
+        }
+
+        public ArrayList<String> getListaLogs() {
+
+            return logs;
+        }
+    }
 }

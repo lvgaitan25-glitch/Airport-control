@@ -3,15 +3,18 @@ package estructuras;
 import java.util.Stack;
 
 public class PilaHistorial {
-    private Stack<String> historial = new Stack<>();
+    private Stack<String> acciones;
 
-    public void guardarAccion(String accion) { historial.push(accion); }
-
-    public String deshacerAccion() {
-        return historial.isEmpty() ? "No hay acciones" : historial.pop();
+    public PilaHistorial() {
+        this.acciones = new Stack<>();
     }
 
-    public String verTop() {
-        return historial.isEmpty() ? "Vacío" : historial.peek();
+    public void guardarAccion(String accion) {
+        acciones.push(accion);
+    }
+
+    // Método necesario para que el Panel pueda leer la lista
+    public Stack<String> getAcciones() {
+        return acciones;
     }
 }
