@@ -173,47 +173,22 @@ public class VentanaPrincipal extends JFrame {
 
                 switch (texto) {
 
-                    case "DASHBOARD":
-
-                        panelDashboard
-                                .actualizarEstadisticas();
-
-                        break;
-
                     case "RADAR":
-
-                        panelRadar
-                                .dibujarRadar();
-
-                        break;
-
-                    case "DESPEGUE":
-
-                        // =================================
-                        // ACTUALIZAR COMBO Y LISTA
-                        // =================================
-
-                        panelDespegue
-                                .actualizarComboAviones();
-
-                        panelDespegue
-                                .actualizarLista();
-
-                        break;
-
-                    case "HISTORIAL":
-
-                        panelHistorial
-                                .cargarHistorial();
-
-                        break;
-
-                    case "PASAJEROS":
-
-                        panelPasajeros
-                                .actualizarTabla();
-
-                        break;
+            panelRadar.dibujarRadar(); 
+            break;
+        case "DESPEGUE":
+            panelDespegue.actualizarComboAviones(); 
+            panelDespegue.actualizarLista();
+            break;
+        case "PASAJEROS":
+            panelPasajeros.actualizarTabla(); 
+            break;
+        case "HISTORIAL":
+            panelHistorial.cargarHistorial(); 
+            break;
+        case "DASHBOARD":
+            panelDashboard.actualizarEstadisticas();
+            break;
                 }
 
                 // =========================================
